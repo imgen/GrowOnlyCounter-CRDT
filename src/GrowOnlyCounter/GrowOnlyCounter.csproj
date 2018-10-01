@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+        <RootNamespace>GrowOnlyCounter</RootNamespace>
+        <AssemblyName>GrowOnlyCounter</AssemblyName>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+</Project>
