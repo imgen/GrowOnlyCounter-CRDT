@@ -55,7 +55,8 @@ namespace GrowOnlyCounter
             var counterGroups = counters
                 .GroupBy(x => index++ % processorCount);
 
-            var countersOfGroups = counterGroups.AsParallel().Select(MergeCounters).ToArray();
+            var countersOfGroups = counterGroups.AsParallel()
+                .Select(MergeCounters).ToArray();
             return MergeCounters(countersOfGroups);
         }
     }
