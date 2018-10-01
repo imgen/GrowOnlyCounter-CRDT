@@ -23,11 +23,8 @@ namespace GrowOnlyCounter
 
         /// <summary>
         /// Calculates the eventual state of all the nodes which merges all the counters of the nodes
-        /// Due to the fact that Merge function is idempotent, associative and commutative, we can make 
-        /// this aggregate process parallel. But since this is simple enough, doing things in parallel
-        /// will actually hurt the performance
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The counter with the merged payload</returns>
         public GrowOnlyCounter GetEventualCounter() =>
             MergeCounters(_serverNodes
                 .Select(x => x.Counter));
@@ -38,6 +35,14 @@ namespace GrowOnlyCounter
                 (accumulated, counter) => accumulated.Merge(counter)
             );
 
+        /// <summary>
+        /// Calculates the eventual state of all the nodes which merges all the counters of the nodes
+        /// in parallel
+        /// Due to the fact that Merge function is idempotent, associative and commutative, we can make 
+        /// this aggregate process parallel. But since this is simple enough, doing things in parallel
+        /// will actually hurt the performance
+        /// </summary>
+        /// <returns>The counter with the merged payload</returns>
         public GrowOnlyCounter GetEventualCounterInParallel()
         {
             const int parallelThreshold = 100;
